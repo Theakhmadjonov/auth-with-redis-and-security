@@ -12,6 +12,8 @@ model User {
   username String @unique
   password String @unique
   phone    String @unique
-
+  email String
+  isPhoneVerified Boolean @default(true)
+  isEmailVerified Boolean @default(false)
   @@map("users")
 }

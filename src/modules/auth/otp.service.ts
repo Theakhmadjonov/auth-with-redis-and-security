@@ -12,7 +12,7 @@ export class OtpService {
     private otpSecurity: OtpSecurityService,
   ) {}
 
-  private generateOtp() {
+  generateOtp() {
     const otp = generate(4, {
       digits: true,
       lowerCaseAlphabets: false,
@@ -22,7 +22,7 @@ export class OtpService {
     return otp;
   }
 
-  private getSessionToken() {
+  getSessionToken() {
     const token = crypto.randomUUID();
     return token;
   }
