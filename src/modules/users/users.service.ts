@@ -24,7 +24,9 @@ export class UsersService {
   async verifyUserEmail(token: string) {
     const data = await this.email.getEmailToken(token);
     const res = JSON.parse(data as string);
-    const user = await this.db.prisma.user.findFirst({ where: { email: res.email } });
+    const user = await this.db.prisma.user.findFirst({
+      where: { email: res.email },
+    });
     await this.db.prisma.user.update({
       where: {
         id: user?.id,
@@ -33,5 +35,8 @@ export class UsersService {
         isEmailVerified: true,
       },
     });
+    return {
+      message: 'Your email verified',
+    };
   }
 }
