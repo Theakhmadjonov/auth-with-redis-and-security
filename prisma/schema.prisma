@@ -8,12 +8,28 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  password String @unique
-  phone    String @unique
-  email String
+  id              Int     @id @default(autoincrement())
+  username        String  @unique
+  password        String  @unique
+  phone           String  @unique
+  email           String
   isPhoneVerified Boolean @default(true)
   isEmailVerified Boolean @default(false)
+
   @@map("users")
+}
+
+model Video {
+  id           String         @id @default(ulid())
+  name         String
+  VideoFormats VideoFormats[]
+
+  @@map("videos")
+}
+
+model VideoFormats {
+  id      Int    @id @default(autoincrement())
+  label   String
+  videoId String @map("video_id")
+  video   Video  @relation(fields: [videoId], references: [id])
 }
