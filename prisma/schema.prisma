@@ -20,9 +20,9 @@ model User {
 }
 
 model Video {
-  id           String         @id @default(ulid())
-  name         String
-  VideoFormats VideoFormats[]
+  id      String         @id @default(ulid())
+  name    String
+  formats VideoFormats[]
 
   @@map("videos")
 }
@@ -30,6 +30,9 @@ model Video {
 model VideoFormats {
   id      Int    @id @default(autoincrement())
   label   String
+  path    String
   videoId String @map("video_id")
   video   Video  @relation(fields: [videoId], references: [id])
+
+  @@map("video_formats")
 }
